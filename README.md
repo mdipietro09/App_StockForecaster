@@ -1,1 +1,1 @@
-# stock_forecasting_App
+# Stock Price Forecaster App with Flask and Tensorflow-Keras
