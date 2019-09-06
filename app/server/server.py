@@ -5,7 +5,6 @@
 import logging
 import flask
 
-from instance import config
 from model.data import data
 
 #import sys
