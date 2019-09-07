@@ -1,0 +1,34 @@
+
+{% extends 'base.html' %}
+
+{% block title %} Index {% endblock %}
+
+{% block head %}
+ {{ super() }}
+{% endblock %}
+
+{% block body %}
+<h2>Select your shit:</h2>
+<form action="" method="post">
+    <div class="form-group">
+        <label>Yahoo Finance Symbol</label>
+        <input type="text" name="symbol" class="form-control" value={{request.form.symbol}}>
+    </div>
+    <div class="form-group">
+        <h3>Dates</h3>
+        <label>from:</label>
+        <input type="text" name="from" class="form-control" value={{request.form.from}}>
+        <label>to:</label>
+        <input type="text" name="to" class="form-control" value={{request.form.to}}>
+    </div>
+    <div class="form-group">
+        <label>Variable to predict</label>
+        <input type="text" name="variable" class="form-control" value={{request.form.variable}}>
+    </div>
+    <button type="submit" class="btn btn-primary">Get data</button>
+</form>
+
+<div>
+    <img src={{img}} alt="Chart" height="42" width="42">
+</div>
+{% endblock %}

@@ -2,8 +2,8 @@
 #                            RUN MAIN                                         #
 ###############################################################################
 
-from instance.config.appsettings import *
-from instance.config.filesystem import *
+from instance.config.app_settings import *
+from instance.config.file_system import *
 from app.server import server
 
 server.app(name=name, host=host, port=port, threaded=threaded, debug=debug)
