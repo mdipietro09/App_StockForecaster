@@ -8,6 +8,22 @@
 {% endblock %}
 
 {% block body %}
-<h1>Hello World</h1>
-<p>Welcome to my site.</p>
+<h1>Stock Forecaster</h1>
+<h2>Select your shit:</h2>
+<form action="" method="POST">
+    <div class="form-group">
+        <label>Yahoo Finance Symbol</label>
+        <input type="text" name="symbol" class="form-control" value={{flask.request.form.symbol}}>
+    </div>
+    <div class="form-group">
+        <label>Dates</label>
+        <input type="text" name="from" class="form-control" value={{flask.request.form.from}}>
+        <input type="text" name="to" class="form-control" value={{flask.request.form.to}}>
+    </div>
+    <div class="form-group">
+        <label>Variable to predict</label>
+        <input type="text" name="variable" class="form-control" value={{flask.request.form.variable}}>
+    </div>
+    <button type="submit" class="btn btn-primary">Get data</button>
+</form>
 {% endblock %}
