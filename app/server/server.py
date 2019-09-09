@@ -16,11 +16,12 @@ from instance.config.file_system import *
 
 '''
 '''
-def app(name=None, host="0.0.0.0", port="5000", threaded=False, debug=False):
+def app(name=None, host="0.0.0.0", port="80", threaded=False, debug=False):
     ## app object
     name = name if name is not None else __name__
+    #app = flask.Flask(name, instance_relative_config=True, template_folder=dirpath+'app/templates')
     app = flask.Flask(name, instance_relative_config=True, template_folder=dirpath+'app/templates')
-        
+    
         
     ## config   
     #app.config.from_pyfile("dirpath+instance.config.app_settings.py", silent=True)
