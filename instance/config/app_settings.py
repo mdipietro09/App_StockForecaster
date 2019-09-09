@@ -1,14 +1,16 @@
 
 name = "Stock Forecaster"
 
+host = "0.0.0.0"
+
+threaded = False
+
+debug = False
+
 ## dev
-#host = "127.0.0.1"
+#port = 5000
 
 ## prod
-#host = "https://flaskapp-stockforecaster.herokuapp.com/"
+port = int(os.environ.get("PORT", 5000))
 
-#port = "80"
 
-#threaded = False
-
-#debug = False
