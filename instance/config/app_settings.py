@@ -1,7 +1,11 @@
 
 name = "Stock Forecaster"
 
-host = "127.0.0.1"
+## dev
+#host = "127.0.0.1"
+
+## prod
+host = "https://flaskapp-stockforecaster.herokuapp.com/"
 
 port = "5000"
 
