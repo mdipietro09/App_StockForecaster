@@ -67,7 +67,7 @@ def app(name=None, host="127.0.0.1", port="5000", threaded=False, debug=False):
     
     ## start server
     try:
-        logging.info('Starting API server, listen IP ' + host + ' on port ' + str(port) + ' threaded = ' + str(threaded))
+        #logging.info('Starting API server, listen IP ' + host + ' on port ' + str(port) + ' threaded = ' + str(threaded))
         #app.run(host=host, port=port, threaded=threaded, debug=debug)
         app.run()
     except(Exception):
