@@ -3,3 +3,4 @@ pandas_datareader
 datetime
 matplotlib
 flask
+gunicorn
