@@ -4,7 +4,7 @@
 
 from instance.config.app_settings import *
 from instance.config.file_system import *
-from application.server import server
+from app.server import server
 
 app = server.app(name=name)
 
