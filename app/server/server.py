@@ -8,18 +8,16 @@ import flask
 from model.data import data
 from instance.config.file_system import *
 
-#import sys
-#sys.path.append(config.dirpath)
-#import os
-#os.chdir(dirpath)
 
 
 '''
 '''
-def app(name=None, host="0.0.0.0", port="80", threaded=False, debug=False):
+def create_app(name=None, host="0.0.0.0", port="80", threaded=False, debug=False):
     ## app object
     name = name if name is not None else __name__
-    app = flask.Flask(name, instance_relative_config=True, template_folder=dirpath+'app/templates')
+    app = flask.Flask(name, instance_relative_config=True, 
+                      template_folder=dirpath+'app/client/templates',
+                      static_folder=dirpath+'app/client/static')
     
         
     ## config   
@@ -64,12 +62,5 @@ def app(name=None, host="0.0.0.0", port="80", threaded=False, debug=False):
     def page_not_found(e):
         return flask.render_template("errors.html"), 404
     
-
-    return app
     
-    ## start server
-    # try:
-    #     #logging.info('Starting API server, listen IP ' + host + ' on port ' + str(port) + ' threaded = ' + str(threaded))
-    #     app.run(host=host, port=port, threaded=threaded, debug=debug)
-    # except(Exception):
-    #     logging.critical('Failure starting API Server')
+    return app
