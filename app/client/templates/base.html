@@ -1,17 +1,18 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    
     {% block head %}
     <title>{% block title %}{% endblock %}</title>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <base href="/">
     
     <!-- BOOTSTRAP -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     
     <!-- JQUERY -->
     <script src="https://code.jquery.com/jquery-1.12.2.min.js" integrity="sha256-lZFHibXzMHo3GGeehn1hudTAP3Sc0uKXBXAzHX1sjtk=" crossorigin="anonymous"></script>
@@ -20,8 +21,10 @@
 
 <body>
     <div class="topnav">
-        <a class="active" href="#">Home</a>
+        <a class="active" href="/">Home</a>
         <a href="/data">Data</a>
+        <a href="/model">Model</a>
+        <a href="/forecast">Forecast</a>
     </div>
     {% block body %}{% endblock %}
 </body>
