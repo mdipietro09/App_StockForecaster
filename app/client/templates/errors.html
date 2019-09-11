@@ -1,10 +1,14 @@
 
 {% extends 'base.html' %}
 
-{% block title %} Page Not Found {% endblock %}
+{% block title %} Error {% endblock %}
+
+{% block head %}
+ {{ super() }}
+{% endblock %}
 
 {% block body %}
-<h1>Error :(</h1>
+<h3>Error :(</h3>
 <p>{{msg}}<p>
 <a href="{{ url_for('index') }}">Go do some cool predictions!</a>
 {% endblock %}
