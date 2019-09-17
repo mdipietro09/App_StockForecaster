@@ -4,6 +4,7 @@ import pandas_datareader as web
 import datetime
 import matplotlib.pyplot as plt
 import io
+import base64
 
 
 
@@ -50,4 +51,5 @@ class data():
         bytes_image = io.BytesIO()
         plt.savefig(bytes_image, format='png')
         bytes_image.seek(0)
-        return bytes_image
+        bytes_image_url = base64.b64encode(bytes_image.getvalue()).decode()
+        return 'data:image/png;base64,{}'.format(bytes_image_url)
