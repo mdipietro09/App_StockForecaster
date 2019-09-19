@@ -33,4 +33,7 @@
 <br><div>
     <img src="{{img}}" class="img-fluid" alt="Responsive image">
 </div>
+<script>
+    $("img").on("error", function(){ $(this).hide(); });
+</script>
 {% endblock %}

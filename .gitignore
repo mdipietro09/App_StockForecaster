@@ -1,2 +1,4 @@
 __pycache__/
 .spyproject/
+model.h5
+train_data.pickle
