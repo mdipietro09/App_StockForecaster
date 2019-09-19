@@ -20,8 +20,7 @@ def create_app(name=None, host="0.0.0.0", port="80", threaded=False, debug=False
     name = name if name is not None else __name__
     app = flask.Flask(name, instance_relative_config=True, 
                       template_folder=dirpath+'app/client/templates',
-                      static_folder=dirpath+'app/client/static',
-                      instance_path=dirpath+'instance')
+                      static_folder=dirpath+'app/client/static')
     
         
     ## config   
