@@ -13,26 +13,21 @@
 <form method="post">
     <div class="form-group">
         <label>Window size</label>
-        <input type="text" name="window" class="form-control" placeholder="20" value={{request.form.window}}>
+        <input type="text" name="window" class="form-control" placeholder="20" required value={{request.form.window}}>
     </div>
     <div class="form-group">
         <label>Days ahead to predict</label>
-        <input type="text" name="ahead" class="form-control" placeholder="5" value={{request.form.ahead}}>
+        <input type="text" name="ahead" class="form-control" placeholder="5" required value={{request.form.ahead}}>
     </div>
     <div class="form-group">
-        <label>Batch size</label>
-        <input type="text" name="batch_size" class="form-control" placeholder="32" value={{request.form.batch_size}}>
-    </div>
-    <div class="form-group">
-        <label>Epochs</label>
-        <input type="text" name="epochs" class="form-control" placeholder="100" value={{request.form.epochs}}>
-    </div>
-    <div class="form-group">
-        <label>Neurons</label>
-        <input type="text" name="neurons" class="form-control" placeholder="50" value={{request.form.neurons}}>
+        <label>Number of Neurons your A.I. shall use</label>
+        <input type="text" name="neurons" class="form-control" placeholder="50" required value={{request.form.neurons}}>
     </div>
     <button type="submit" class="btn btn-primary">Predict</button>
 </form>
+<script>
+
+</script>
 
 <!-- TABLE -->
 <br><div>

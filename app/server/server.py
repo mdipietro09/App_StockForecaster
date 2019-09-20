@@ -43,9 +43,6 @@ def create_app(name=None, host="0.0.0.0", port="80", threaded=False, debug=False
             if flask.request.method == 'POST':
                 ### input dal client
                 #symbol = flask.request.args["symbol"]
-                #from_str = flask.request.args["from"]
-                #to_str = flask.request.args["to"]
-                #variable = flask.request.args["variable"]
                 symbol = flask.request.form["symbol"]
                 from_str = flask.request.form["from"]
                 to_str = flask.request.form["to"]
@@ -75,14 +72,12 @@ def create_app(name=None, host="0.0.0.0", port="80", threaded=False, debug=False
                 ts = pickle.load( open(dirpath+'instance/ts.pickle', mode="rb") )
                 ### input dal client
                 window = int(flask.request.form["window"])
-                batch_size = int(flask.request.form["batch_size"])
-                epochs = int(flask.request.form["epochs"])
                 neurons = int(flask.request.form["neurons"])
                 ahead = int(flask.request.form["ahead"])
                 ### preprocessing
                 model = lstm(ts, size=window)
                 model.ts_preprocessing(scaler=None)
-                model.fit_lstm(batch_size=batch_size, epochs=epochs, units=neurons)
+                model.fit_lstm(units=neurons)
                 img = model.predict_lstm(ts=ts, ahead=ahead)
                 dtf = model.dtf[ pd.notnull(model.dtf["pred"]) ][["pred"]].reset_index(drop=True)
                 return flask.render_template("model.html", img=img, dtf=dtf.to_html())
