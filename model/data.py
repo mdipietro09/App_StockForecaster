@@ -53,3 +53,4 @@ class data():
         bytes_image.seek(0)
         bytes_image_url = base64.b64encode(bytes_image.getvalue()).decode()
         return 'data:image/png;base64,{}'.format(bytes_image_url)
+        

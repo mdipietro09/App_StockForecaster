@@ -28,13 +28,10 @@
             <li class="nav-item"><a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a></li>
             <li class="nav-item"><a class="nav-link" href="/data">Data</a></li>
             <li class="nav-item"><a class="nav-link" href="/model">Model</a></li>
-            <li class="nav-item"><a class="nav-link" href="/forecast">Forecast</a></li>
         </ul></div>
     </nav>
     <script>
-        $(".navbar-nav li a").click(function(e) {
-            $(this).addClass("active");
-        });
+        $(".navbar-nav li a").on("click", function(){ $(this).addClass("active"); });
     </script>
     
     <!-- BODY -->
