@@ -3,9 +3,9 @@
 ###############################################################################
 
 import flask
-import pickle
 from tensorflow.keras import models
 import pandas as pd
+import ast
 
 from model.data import data
 from model.lstm import lstm
@@ -15,16 +15,12 @@ from instance.config.file_system import *
 
 '''
 '''
-def create_app(name=None, host="0.0.0.0", port="80", threaded=False, debug=False):
+def create_app(name=None):
     ## app object
     name = name if name is not None else __name__
     app = flask.Flask(name, instance_relative_config=True, 
                       template_folder=dirpath+'app/client/templates',
                       static_folder=dirpath+'app/client/static')
-    
-        
-    ## config   
-    #app.config.from_pyfile("config/app_settings.py", silent=True)
     
     
     ## api
@@ -32,57 +28,59 @@ def create_app(name=None, host="0.0.0.0", port="80", threaded=False, debug=False
     def ping():
         return 'pong'
     
-    @app.route("/", methods=["GET"])
-    def index():
-        #return flask.send_from_directory(directory=config.dirpath+"app/templates/", filename="index.html")
-        return flask.render_template("index.html")
     
-    @app.route("/data", methods=['GET', 'POST'])
-    def get_data():
+    @app.route("/", methods=['GET', 'POST'])
+    def index():
         try:
             if flask.request.method == 'POST':
                 ### input dal client
-                #symbol = flask.request.args["symbol"]
                 symbol = flask.request.form["symbol"]
                 from_str = flask.request.form["from"]
                 to_str = flask.request.form["to"]
                 variable = flask.request.form["variable"]
-                ### get data
-                stock = data(symbol, from_str, to_str, variable)
-                stock.get_dates()
-                stock.get_data()
-                img = stock.plot_ts(plot_ma=True, plot_intervals=True, window=30, figsize=(20,13))
-                ## save data
-                pickle_out = open(dirpath+'instance/ts.pickle', mode="wb")
-                pickle.dump(stock.ts, pickle_out)
-                pickle_out.close()
-                #return flask.send_file(img, attachment_filename='plot.png', mimetype='image/png')
-                return flask.render_template("data.html", img=img)
+                parameters = {"symbol":symbol, "from_str":from_str, "to_str":to_str, "variable":variable}
+                app.logger.info(parameters)
+                ### redirect
+                app.logger.info("Redirecting...") 
+                return flask.redirect(flask.url_for("forecaster", parameters=str(parameters)))
             else:
-                return flask.render_template("data.html")
+                return flask.render_template("index.html")
         except Exception as e:
             app.logger.error(e)
             flask.abort(500)
     
-    @app.route("/model", methods=['GET', 'POST'])
-    def train_model():
+    
+    @app.route("/forecaster/<parameters>", methods=['GET', 'POST'])
+    def forecaster(parameters):
         try:
+            ### get data
+            app.logger.info("...Redirected")
+            parameters = ast.literal_eval(parameters)
+            symbol = parameters["symbol"]
+            from_str = parameters["from_str"]
+            to_str = parameters["to_str"]
+            variable = parameters["variable"]
+            stock = data(symbol, from_str, to_str, variable)
+            stock.get_dates()
+            stock.get_data()
+            img = stock.plot_ts(plot_ma=True, plot_intervals=True, window=30, figsize=(20,13))
+            app.logger.info("Got data for "+symbol)
+            
             if flask.request.method == 'POST':
-                ### load data
-                ts = pickle.load( open(dirpath+'instance/ts.pickle', mode="rb") )
                 ### input dal client
                 window = int(flask.request.form["window"])
                 neurons = int(flask.request.form["neurons"])
                 ahead = int(flask.request.form["ahead"])
                 ### preprocessing
-                model = lstm(ts, size=window)
+                model = lstm(stock.ts, size=window)
                 model.ts_preprocessing(scaler=None)
                 model.fit_lstm(units=neurons)
-                img = model.predict_lstm(ts=ts, ahead=ahead)
+                img = model.predict_lstm(ts=stock.ts, ahead=ahead)
                 dtf = model.dtf[ pd.notnull(model.dtf["pred"]) ][["pred"]].reset_index(drop=True)
-                return flask.render_template("model.html", img=img, dtf=dtf.to_html())
+                return flask.render_template("model.html", img=img, dtf=dtf)
+            
             else:
-                return flask.render_template("model.html")
+                return flask.render_template("model.html", img=img, dtf=None)
         except Exception as e:
             app.logger.error(e)
             flask.abort(500)

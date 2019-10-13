@@ -5,7 +5,7 @@ host = "0.0.0.0"
 
 threaded = False
 
-debug = True
+debug = False
 
 ## dev
 #port = 5000
