@@ -21,6 +21,7 @@
         <!-- INPUT FORM -->
         <div class="col col-4">
             <form method="post">
+                
                 <br><label>Window size
                         <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="How often the pattern appears? For example use the last 20 days to predict the 21st day, if you think there is a pattern every 20 days."><span class="fa fa-info-circle"></span></button>
                 </label>
@@ -37,12 +38,13 @@
                 <input type="text" name="neurons" class="form-control" placeholder="50" required value={{request.form.neurons}}>
                 
                 <br><br><br><button type="submit" class="btn btn-primary" id="btnModel">Predict</button>
-                <script>
-                    $("#btnModel").click(function() {
-                        $(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
-                    });
-                </script>
+
             </form>
+            <script>
+                $("form").submit(function() {
+                    $("#btnModel").html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
+                });
+            </script>
         </div>
         
         <!-- PLOT OUTPUT-->
