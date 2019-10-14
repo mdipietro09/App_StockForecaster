@@ -36,7 +36,12 @@
                 </label>
                 <input type="text" name="neurons" class="form-control" placeholder="50" required value={{request.form.neurons}}>
                 
-                <br><br><br><button type="submit" class="btn btn-primary">Predict</button>
+                <br><br><br><button type="submit" class="btn btn-primary" id="btnModel">Predict</button>
+                <script>
+                    $("#btnModel").click(function() {
+                        $(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
+                    });
+                </script>
             </form>
         </div>
         
