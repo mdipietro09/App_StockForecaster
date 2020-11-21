@@ -1,3 +1,3 @@
-# Stock Price Forecaster App with Flask and Tensorflow-Keras
+# Flask App to predict Stock Prices with Python & Tensorflow
 
 https://stockforecaster.herokuapp.com/
